@@ -19,6 +19,8 @@ function analyze() {
   if (uploadFiles.length !== 1) alert("Please select a file to analyze!");
 
   el("analyze-button").innerHTML = "Analyzing...";
+  el("result-label").innerHTML = ""
+  $(".result-label").removeClass("fade");
   var xhr = new XMLHttpRequest();
   var loc = window.location;
   xhr.open("POST", `${loc.protocol}//${loc.hostname}:${loc.port}/analyze`,
@@ -30,7 +32,7 @@ function analyze() {
     if (this.readyState === 4) {
       var response = JSON.parse(e.target.responseText);
       $(".result-label").addClass("fade");
-      el("result-label").innerHTML = `It's a: ${response["result"]}!`;
+      el("result-label").innerHTML = `I think it's a ${response["result"]}`;
     }
     el("analyze-button").innerHTML = "Analyze";
   };
